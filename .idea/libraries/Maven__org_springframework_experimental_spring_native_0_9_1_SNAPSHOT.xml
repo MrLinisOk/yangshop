@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.experimental:spring-native:0.9.1-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../m2/repository/org/springframework/experimental/spring-native/0.9.1-SNAPSHOT/spring-native-0.9.1-20210319.163208-38.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../m2/repository/org/springframework/experimental/spring-native/0.9.1-SNAPSHOT/spring-native-0.9.1-20210322.194103-50.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../m2/repository/org/springframework/experimental/spring-native/0.9.1-SNAPSHOT/spring-native-0.9.1-20210319.163208-38-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../m2/repository/org/springframework/experimental/spring-native/0.9.1-SNAPSHOT/spring-native-0.9.1-20210322.194103-50-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../m2/repository/org/springframework/experimental/spring-native/0.9.1-SNAPSHOT/spring-native-0.9.1-20210319.163208-38-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../m2/repository/org/springframework/experimental/spring-native/0.9.1-SNAPSHOT/spring-native-0.9.1-20210322.194103-50-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

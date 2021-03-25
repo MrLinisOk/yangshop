@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.DbProdAttrMapper">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.DbProdAttr">
+    <result column="PROD_ID" jdbcType="INTEGER" property="prodId" />
+    <result column="ATTR_ID" jdbcType="INTEGER" property="attrId" />
+    <result column="ATTR_VALUE" jdbcType="VARCHAR" property="attrValue" />
+  </resultMap>
+  <insert id="insert" parameterType="com.shop.yangshop.po.DbProdAttr">
+    insert into DB_PROD_ATTR (PROD_ID, ATTR_ID, ATTR_VALUE
+      )
+    values (#{prodId,jdbcType=INTEGER}, #{attrId,jdbcType=INTEGER}, #{attrValue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shop.yangshop.po.DbProdAttr">
+    insert into DB_PROD_ATTR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        PROD_ID,
+      </if>
+      <if test="attrId != null">
+        ATTR_ID,
+      </if>
+      <if test="attrValue != null">
+        ATTR_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        #{prodId,jdbcType=INTEGER},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=INTEGER},
+      </if>
+      <if test="attrValue != null">
+        #{attrValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
