@@ -1,4 +1,4 @@
 package com.shop.yangshop.service;
 
-public interface IUserSV {
+public interface IRightsSV {
 }

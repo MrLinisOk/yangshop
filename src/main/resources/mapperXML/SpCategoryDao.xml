@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.SpCategoryDao">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.SpCategory">
+    <id column="cat_id" jdbcType="INTEGER" property="catId" />
+    <result column="cat_name" jdbcType="VARCHAR" property="catName" />
+    <result column="cat_pid" jdbcType="INTEGER" property="catPid" />
+    <result column="cat_level" jdbcType="INTEGER" property="catLevel" />
+    <result column="cat_deleted" jdbcType="INTEGER" property="catDeleted" />
+    <result column="cat_icon" jdbcType="VARCHAR" property="catIcon" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.shop.yangshop.po.SpCategory">
+    <result column="cat_src" jdbcType="LONGVARCHAR" property="catSrc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cat_id, cat_name, cat_pid, cat_level, cat_deleted, cat_icon
+  </sql>
+  <sql id="Blob_Column_List">
+    cat_src
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sp_category
+    where cat_id = #{catId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sp_category
+    where cat_id = #{catId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="cat_id" keyProperty="catId" parameterType="com.shop.yangshop.po.SpCategory" useGeneratedKeys="true">
+    insert into sp_category (cat_name, cat_pid, cat_level, 
+      cat_deleted, cat_icon, cat_src
+      )
+    values (#{catName,jdbcType=VARCHAR}, #{catPid,jdbcType=INTEGER}, #{catLevel,jdbcType=INTEGER}, 
+      #{catDeleted,jdbcType=INTEGER}, #{catIcon,jdbcType=VARCHAR}, #{catSrc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="cat_id" keyProperty="catId" parameterType="com.shop.yangshop.po.SpCategory" useGeneratedKeys="true">
+    insert into sp_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="catName != null">
+        cat_name,
+      </if>
+      <if test="catPid != null">
+        cat_pid,
+      </if>
+      <if test="catLevel != null">
+        cat_level,
+      </if>
+      <if test="catDeleted != null">
+        cat_deleted,
+      </if>
+      <if test="catIcon != null">
+        cat_icon,
+      </if>
+      <if test="catSrc != null">
+        cat_src,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="catName != null">
+        #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="catPid != null">
+        #{catPid,jdbcType=INTEGER},
+      </if>
+      <if test="catLevel != null">
+        #{catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="catDeleted != null">
+        #{catDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="catIcon != null">
+        #{catIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="catSrc != null">
+        #{catSrc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.yangshop.po.SpCategory">
+    update sp_category
+    <set>
+      <if test="catName != null">
+        cat_name = #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="catPid != null">
+        cat_pid = #{catPid,jdbcType=INTEGER},
+      </if>
+      <if test="catLevel != null">
+        cat_level = #{catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="catDeleted != null">
+        cat_deleted = #{catDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="catIcon != null">
+        cat_icon = #{catIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="catSrc != null">
+        cat_src = #{catSrc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where cat_id = #{catId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shop.yangshop.po.SpCategory">
+    update sp_category
+    set cat_name = #{catName,jdbcType=VARCHAR},
+      cat_pid = #{catPid,jdbcType=INTEGER},
+      cat_level = #{catLevel,jdbcType=INTEGER},
+      cat_deleted = #{catDeleted,jdbcType=INTEGER},
+      cat_icon = #{catIcon,jdbcType=VARCHAR},
+      cat_src = #{catSrc,jdbcType=LONGVARCHAR}
+    where cat_id = #{catId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.yangshop.po.SpCategory">
+    update sp_category
+    set cat_name = #{catName,jdbcType=VARCHAR},
+      cat_pid = #{catPid,jdbcType=INTEGER},
+      cat_level = #{catLevel,jdbcType=INTEGER},
+      cat_deleted = #{catDeleted,jdbcType=INTEGER},
+      cat_icon = #{catIcon,jdbcType=VARCHAR}
+    where cat_id = #{catId,jdbcType=INTEGER}
+  </update>
+</mapper>

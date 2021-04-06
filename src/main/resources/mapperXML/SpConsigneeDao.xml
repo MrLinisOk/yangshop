@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.SpConsigneeDao">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.SpConsignee">
+    <id column="cgn_id" jdbcType="INTEGER" property="cgnId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="cgn_name" jdbcType="VARCHAR" property="cgnName" />
+    <result column="cgn_address" jdbcType="VARCHAR" property="cgnAddress" />
+    <result column="cgn_tel" jdbcType="VARCHAR" property="cgnTel" />
+    <result column="cgn_code" jdbcType="CHAR" property="cgnCode" />
+    <result column="delete_time" jdbcType="INTEGER" property="deleteTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cgn_id, user_id, cgn_name, cgn_address, cgn_tel, cgn_code, delete_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sp_consignee
+    where cgn_id = #{cgnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sp_consignee
+    where cgn_id = #{cgnId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="cgn_id" keyProperty="cgnId" parameterType="com.shop.yangshop.po.SpConsignee" useGeneratedKeys="true">
+    insert into sp_consignee (user_id, cgn_name, cgn_address, 
+      cgn_tel, cgn_code, delete_time
+      )
+    values (#{userId,jdbcType=INTEGER}, #{cgnName,jdbcType=VARCHAR}, #{cgnAddress,jdbcType=VARCHAR}, 
+      #{cgnTel,jdbcType=VARCHAR}, #{cgnCode,jdbcType=CHAR}, #{deleteTime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="cgn_id" keyProperty="cgnId" parameterType="com.shop.yangshop.po.SpConsignee" useGeneratedKeys="true">
+    insert into sp_consignee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="cgnName != null">
+        cgn_name,
+      </if>
+      <if test="cgnAddress != null">
+        cgn_address,
+      </if>
+      <if test="cgnTel != null">
+        cgn_tel,
+      </if>
+      <if test="cgnCode != null">
+        cgn_code,
+      </if>
+      <if test="deleteTime != null">
+        delete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="cgnName != null">
+        #{cgnName,jdbcType=VARCHAR},
+      </if>
+      <if test="cgnAddress != null">
+        #{cgnAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cgnTel != null">
+        #{cgnTel,jdbcType=VARCHAR},
+      </if>
+      <if test="cgnCode != null">
+        #{cgnCode,jdbcType=CHAR},
+      </if>
+      <if test="deleteTime != null">
+        #{deleteTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.yangshop.po.SpConsignee">
+    update sp_consignee
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="cgnName != null">
+        cgn_name = #{cgnName,jdbcType=VARCHAR},
+      </if>
+      <if test="cgnAddress != null">
+        cgn_address = #{cgnAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cgnTel != null">
+        cgn_tel = #{cgnTel,jdbcType=VARCHAR},
+      </if>
+      <if test="cgnCode != null">
+        cgn_code = #{cgnCode,jdbcType=CHAR},
+      </if>
+      <if test="deleteTime != null">
+        delete_time = #{deleteTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cgn_id = #{cgnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.yangshop.po.SpConsignee">
+    update sp_consignee
+    set user_id = #{userId,jdbcType=INTEGER},
+      cgn_name = #{cgnName,jdbcType=VARCHAR},
+      cgn_address = #{cgnAddress,jdbcType=VARCHAR},
+      cgn_tel = #{cgnTel,jdbcType=VARCHAR},
+      cgn_code = #{cgnCode,jdbcType=CHAR},
+      delete_time = #{deleteTime,jdbcType=INTEGER}
+    where cgn_id = #{cgnId,jdbcType=INTEGER}
+  </update>
+</mapper>

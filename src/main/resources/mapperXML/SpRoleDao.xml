@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.SpRoleDao">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.SpRole">
+    <id column="role_id" jdbcType="SMALLINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="ps_ids" jdbcType="VARCHAR" property="psIds" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.shop.yangshop.po.SpRoleWithBLOBs">
+    <result column="ps_ca" jdbcType="LONGVARCHAR" property="psCa" />
+    <result column="role_desc" jdbcType="LONGVARCHAR" property="roleDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_name, ps_ids
+  </sql>
+  <sql id="Blob_Column_List">
+    ps_ca, role_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sp_role
+    where role_id = #{roleId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from sp_role
+    where role_id = #{roleId,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" keyColumn="role_id" keyProperty="roleId" parameterType="com.shop.yangshop.po.SpRoleWithBLOBs" useGeneratedKeys="true">
+    insert into sp_role (role_name, ps_ids, ps_ca, 
+      role_desc)
+    values (#{roleName,jdbcType=VARCHAR}, #{psIds,jdbcType=VARCHAR}, #{psCa,jdbcType=LONGVARCHAR}, 
+      #{roleDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="role_id" keyProperty="roleId" parameterType="com.shop.yangshop.po.SpRoleWithBLOBs" useGeneratedKeys="true">
+    insert into sp_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="psIds != null">
+        ps_ids,
+      </if>
+      <if test="psCa != null">
+        ps_ca,
+      </if>
+      <if test="roleDesc != null">
+        role_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="psIds != null">
+        #{psIds,jdbcType=VARCHAR},
+      </if>
+      <if test="psCa != null">
+        #{psCa,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        #{roleDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.yangshop.po.SpRoleWithBLOBs">
+    update sp_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="psIds != null">
+        ps_ids = #{psIds,jdbcType=VARCHAR},
+      </if>
+      <if test="psCa != null">
+        ps_ca = #{psCa,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        role_desc = #{roleDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shop.yangshop.po.SpRoleWithBLOBs">
+    update sp_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      ps_ids = #{psIds,jdbcType=VARCHAR},
+      ps_ca = #{psCa,jdbcType=LONGVARCHAR},
+      role_desc = #{roleDesc,jdbcType=LONGVARCHAR}
+    where role_id = #{roleId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.yangshop.po.SpRole">
+    update sp_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      ps_ids = #{psIds,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=SMALLINT}
+  </update>
+</mapper>

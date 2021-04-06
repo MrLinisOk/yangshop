@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.SpGoodsPicsDao">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.SpGoodsPics">
+    <id column="pics_id" jdbcType="INTEGER" property="picsId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="pics_big" jdbcType="CHAR" property="picsBig" />
+    <result column="pics_mid" jdbcType="CHAR" property="picsMid" />
+    <result column="pics_sma" jdbcType="CHAR" property="picsSma" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pics_id, goods_id, pics_big, pics_mid, pics_sma
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sp_goods_pics
+    where pics_id = #{picsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sp_goods_pics
+    where pics_id = #{picsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="pics_id" keyProperty="picsId" parameterType="com.shop.yangshop.po.SpGoodsPics" useGeneratedKeys="true">
+    insert into sp_goods_pics (goods_id, pics_big, pics_mid, 
+      pics_sma)
+    values (#{goodsId,jdbcType=INTEGER}, #{picsBig,jdbcType=CHAR}, #{picsMid,jdbcType=CHAR}, 
+      #{picsSma,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="pics_id" keyProperty="picsId" parameterType="com.shop.yangshop.po.SpGoodsPics" useGeneratedKeys="true">
+    insert into sp_goods_pics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="picsBig != null">
+        pics_big,
+      </if>
+      <if test="picsMid != null">
+        pics_mid,
+      </if>
+      <if test="picsSma != null">
+        pics_sma,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="picsBig != null">
+        #{picsBig,jdbcType=CHAR},
+      </if>
+      <if test="picsMid != null">
+        #{picsMid,jdbcType=CHAR},
+      </if>
+      <if test="picsSma != null">
+        #{picsSma,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.yangshop.po.SpGoodsPics">
+    update sp_goods_pics
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="picsBig != null">
+        pics_big = #{picsBig,jdbcType=CHAR},
+      </if>
+      <if test="picsMid != null">
+        pics_mid = #{picsMid,jdbcType=CHAR},
+      </if>
+      <if test="picsSma != null">
+        pics_sma = #{picsSma,jdbcType=CHAR},
+      </if>
+    </set>
+    where pics_id = #{picsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.yangshop.po.SpGoodsPics">
+    update sp_goods_pics
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      pics_big = #{picsBig,jdbcType=CHAR},
+      pics_mid = #{picsMid,jdbcType=CHAR},
+      pics_sma = #{picsSma,jdbcType=CHAR}
+    where pics_id = #{picsId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.SpUserDao">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.SpUser">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="qq_open_id" jdbcType="CHAR" property="qqOpenId" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_email_code" jdbcType="CHAR" property="userEmailCode" />
+    <result column="is_active" jdbcType="CHAR" property="isActive" />
+    <result column="user_sex" jdbcType="CHAR" property="userSex" />
+    <result column="user_qq" jdbcType="VARCHAR" property="userQq" />
+    <result column="user_tel" jdbcType="VARCHAR" property="userTel" />
+    <result column="user_xueli" jdbcType="CHAR" property="userXueli" />
+    <result column="user_hobby" jdbcType="VARCHAR" property="userHobby" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.shop.yangshop.po.SpUser">
+    <result column="user_introduce" jdbcType="LONGVARCHAR" property="userIntroduce" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, username, qq_open_id, `password`, user_email, user_email_code, is_active, 
+    user_sex, user_qq, user_tel, user_xueli, user_hobby, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    user_introduce
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sp_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sp_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.shop.yangshop.po.SpUser" useGeneratedKeys="true">
+    insert into sp_user (username, qq_open_id, `password`, 
+      user_email, user_email_code, is_active, 
+      user_sex, user_qq, user_tel, 
+      user_xueli, user_hobby, create_time, 
+      update_time, user_introduce)
+    values (#{username,jdbcType=VARCHAR}, #{qqOpenId,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{userEmailCode,jdbcType=CHAR}, #{isActive,jdbcType=CHAR}, 
+      #{userSex,jdbcType=CHAR}, #{userQq,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, 
+      #{userXueli,jdbcType=CHAR}, #{userHobby,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=INTEGER}, #{userIntroduce,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.shop.yangshop.po.SpUser" useGeneratedKeys="true">
+    insert into sp_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="qqOpenId != null">
+        qq_open_id,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userEmailCode != null">
+        user_email_code,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userQq != null">
+        user_qq,
+      </if>
+      <if test="userTel != null">
+        user_tel,
+      </if>
+      <if test="userXueli != null">
+        user_xueli,
+      </if>
+      <if test="userHobby != null">
+        user_hobby,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="userIntroduce != null">
+        user_introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="qqOpenId != null">
+        #{qqOpenId,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmailCode != null">
+        #{userEmailCode,jdbcType=CHAR},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=CHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userQq != null">
+        #{userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null">
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userXueli != null">
+        #{userXueli,jdbcType=CHAR},
+      </if>
+      <if test="userHobby != null">
+        #{userHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="userIntroduce != null">
+        #{userIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.yangshop.po.SpUser">
+    update sp_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="qqOpenId != null">
+        qq_open_id = #{qqOpenId,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=CHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmailCode != null">
+        user_email_code = #{userEmailCode,jdbcType=CHAR},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=CHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userQq != null">
+        user_qq = #{userQq,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null">
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userXueli != null">
+        user_xueli = #{userXueli,jdbcType=CHAR},
+      </if>
+      <if test="userHobby != null">
+        user_hobby = #{userHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="userIntroduce != null">
+        user_introduce = #{userIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shop.yangshop.po.SpUser">
+    update sp_user
+    set username = #{username,jdbcType=VARCHAR},
+      qq_open_id = #{qqOpenId,jdbcType=CHAR},
+      `password` = #{password,jdbcType=CHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_email_code = #{userEmailCode,jdbcType=CHAR},
+      is_active = #{isActive,jdbcType=CHAR},
+      user_sex = #{userSex,jdbcType=CHAR},
+      user_qq = #{userQq,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      user_xueli = #{userXueli,jdbcType=CHAR},
+      user_hobby = #{userHobby,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      user_introduce = #{userIntroduce,jdbcType=LONGVARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.yangshop.po.SpUser">
+    update sp_user
+    set username = #{username,jdbcType=VARCHAR},
+      qq_open_id = #{qqOpenId,jdbcType=CHAR},
+      `password` = #{password,jdbcType=CHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_email_code = #{userEmailCode,jdbcType=CHAR},
+      is_active = #{isActive,jdbcType=CHAR},
+      user_sex = #{userSex,jdbcType=CHAR},
+      user_qq = #{userQq,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      user_xueli = #{userXueli,jdbcType=CHAR},
+      user_hobby = #{userHobby,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

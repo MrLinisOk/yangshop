@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.SpPermissionDao">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.SpPermission">
+    <id column="ps_id" jdbcType="SMALLINT" property="psId" />
+    <result column="ps_name" jdbcType="VARCHAR" property="psName" />
+    <result column="ps_pid" jdbcType="SMALLINT" property="psPid" />
+    <result column="ps_c" jdbcType="VARCHAR" property="psC" />
+    <result column="ps_a" jdbcType="VARCHAR" property="psA" />
+    <result column="ps_level" jdbcType="CHAR" property="psLevel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ps_id, ps_name, ps_pid, ps_c, ps_a, ps_level
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sp_permission
+    where ps_id = #{psId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from sp_permission
+    where ps_id = #{psId,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" keyColumn="ps_id" keyProperty="psId" parameterType="com.shop.yangshop.po.SpPermission" useGeneratedKeys="true">
+    insert into sp_permission (ps_name, ps_pid, ps_c, 
+      ps_a, ps_level)
+    values (#{psName,jdbcType=VARCHAR}, #{psPid,jdbcType=SMALLINT}, #{psC,jdbcType=VARCHAR}, 
+      #{psA,jdbcType=VARCHAR}, #{psLevel,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ps_id" keyProperty="psId" parameterType="com.shop.yangshop.po.SpPermission" useGeneratedKeys="true">
+    insert into sp_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="psName != null">
+        ps_name,
+      </if>
+      <if test="psPid != null">
+        ps_pid,
+      </if>
+      <if test="psC != null">
+        ps_c,
+      </if>
+      <if test="psA != null">
+        ps_a,
+      </if>
+      <if test="psLevel != null">
+        ps_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="psName != null">
+        #{psName,jdbcType=VARCHAR},
+      </if>
+      <if test="psPid != null">
+        #{psPid,jdbcType=SMALLINT},
+      </if>
+      <if test="psC != null">
+        #{psC,jdbcType=VARCHAR},
+      </if>
+      <if test="psA != null">
+        #{psA,jdbcType=VARCHAR},
+      </if>
+      <if test="psLevel != null">
+        #{psLevel,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.yangshop.po.SpPermission">
+    update sp_permission
+    <set>
+      <if test="psName != null">
+        ps_name = #{psName,jdbcType=VARCHAR},
+      </if>
+      <if test="psPid != null">
+        ps_pid = #{psPid,jdbcType=SMALLINT},
+      </if>
+      <if test="psC != null">
+        ps_c = #{psC,jdbcType=VARCHAR},
+      </if>
+      <if test="psA != null">
+        ps_a = #{psA,jdbcType=VARCHAR},
+      </if>
+      <if test="psLevel != null">
+        ps_level = #{psLevel,jdbcType=CHAR},
+      </if>
+    </set>
+    where ps_id = #{psId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.yangshop.po.SpPermission">
+    update sp_permission
+    set ps_name = #{psName,jdbcType=VARCHAR},
+      ps_pid = #{psPid,jdbcType=SMALLINT},
+      ps_c = #{psC,jdbcType=VARCHAR},
+      ps_a = #{psA,jdbcType=VARCHAR},
+      ps_level = #{psLevel,jdbcType=CHAR}
+    where ps_id = #{psId,jdbcType=SMALLINT}
+  </update>
+</mapper>

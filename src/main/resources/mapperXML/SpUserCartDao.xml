@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.yangshop.dao.SpUserCartDao">
+  <resultMap id="BaseResultMap" type="com.shop.yangshop.po.SpUserCart">
+    <id column="cart_id" jdbcType="INTEGER" property="cartId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.shop.yangshop.po.SpUserCart">
+    <result column="cart_info" jdbcType="LONGVARCHAR" property="cartInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cart_id, user_id, created_at, updated_at, delete_time
+  </sql>
+  <sql id="Blob_Column_List">
+    cart_info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sp_user_cart
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sp_user_cart
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="cart_id" keyProperty="cartId" parameterType="com.shop.yangshop.po.SpUserCart" useGeneratedKeys="true">
+    insert into sp_user_cart (user_id, created_at, updated_at, 
+      delete_time, cart_info)
+    values (#{userId,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deleteTime,jdbcType=TIMESTAMP}, #{cartInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="cart_id" keyProperty="cartId" parameterType="com.shop.yangshop.po.SpUserCart" useGeneratedKeys="true">
+    insert into sp_user_cart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deleteTime != null">
+        delete_time,
+      </if>
+      <if test="cartInfo != null">
+        cart_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null">
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cartInfo != null">
+        #{cartInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.yangshop.po.SpUserCart">
+    update sp_user_cart
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null">
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cartInfo != null">
+        cart_info = #{cartInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shop.yangshop.po.SpUserCart">
+    update sp_user_cart
+    set user_id = #{userId,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      cart_info = #{cartInfo,jdbcType=LONGVARCHAR}
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.yangshop.po.SpUserCart">
+    update sp_user_cart
+    set user_id = #{userId,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP}
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </update>
+</mapper>
